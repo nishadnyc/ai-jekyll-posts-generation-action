@@ -60,6 +60,9 @@ async function getPublicRepos() {
     });
 
     const data = JSON.parse(res.data);
+    if (Array.isArray(data) && data.length > 0) {
+      return new Date(data.commit.committer.date); // <-- BUG: data is an array, not an object!
+    }
     if (!Array.isArray(data) || data.length === 0) break;
 
     data.forEach((repo) => {
