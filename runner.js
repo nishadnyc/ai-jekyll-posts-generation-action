@@ -53,16 +53,13 @@ async function getPublicRepos() {
   let page = 1;
 
   while (true) {
-    const url = `https://github.com/${username}/repos?type=public&page=${page}&per_page=100`;
+    const url = `https://api.github.com/users/${username}/repos?type=public&page=${page}&per_page=100`;
     const res = await makeRequest(url, "GET", {
       Authorization: `token ${githubToken}`,
       Accept: "application/vnd.github.v3+json",
     });
 
     const data = JSON.parse(res.data);
-    if (Array.isArray(data) && data.length > 0) {
-      return new Date(data.commit.committer.date); // <-- BUG: data is an array, not an object!
-    }
     if (!Array.isArray(data) || data.length === 0) break;
 
     data.forEach((repo) => {
@@ -84,7 +81,7 @@ async function getPublicRepos() {
 
 // Get last commit date on default branch
 async function getLastCommitDate(repo) {
-  const url = `https://github.com/${username}/${repo.name}/commits?per_page=1`;
+  const url = `https://api.github.com/repos/${username}/${repo.name}/commits?per_page=1`;
   const res = await makeRequest(url, "GET", {
     Authorization: `token ${githubToken}`,
     Accept: "application/vnd.github.v3+json",
@@ -100,7 +97,7 @@ async function getLastCommitDate(repo) {
 
 // Get raw README content
 async function getReadme(repo) {
-  const url = `https://github.com/${username}/${repo.name}/readme`;
+  const url = `https://api.github.com/repos/${username}/${repo.name}/readme`;
   try {
     const res = await makeRequest(url, "GET", {
       Authorization: `token ${githubToken}`,
@@ -131,7 +128,7 @@ async function generateArticle(readme) {
     readme;
 
   const res = await makeRequest(
-    "https://ollama.com",
+    "https://ollama.com/api/generate",
     "POST",
     {
       Authorization: `Bearer ${ollamaKey}`,
