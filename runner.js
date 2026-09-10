@@ -53,7 +53,7 @@ async function getPublicRepos() {
   let page = 1;
 
   while (true) {
-    const url = `https://github.com{username}/repos?type=public&page=${page}&per_page=100`;
+    const url = `https://github.com/{username}/repos?type=public&page=${page}&per_page=100`;
     const res = await makeRequest(url, "GET", {
       Authorization: `token ${githubToken}`,
       Accept: "application/vnd.github.v3+json",
