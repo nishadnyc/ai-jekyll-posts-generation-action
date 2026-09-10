@@ -81,7 +81,7 @@ async function getPublicRepos() {
 
 // Get last commit date on default branch
 async function getLastCommitDate(repo) {
-  const url = `https://github.com{username}/${repo.name}/commits?per_page=1`;
+  const url = `https://github.com/{username}/${repo.name}/commits?per_page=1`;
   const res = await makeRequest(url, "GET", {
     Authorization: `token ${githubToken}`,
     Accept: "application/vnd.github.v3+json",
@@ -97,7 +97,7 @@ async function getLastCommitDate(repo) {
 
 // Get raw README content
 async function getReadme(repo) {
-  const url = `https://github.com{username}/${repo.name}/readme`;
+  const url = `https://github.com/{username}/${repo.name}/readme`;
   try {
     const res = await makeRequest(url, "GET", {
       Authorization: `token ${githubToken}`,
