@@ -7,7 +7,7 @@ const ollamaKey = process.env.OLLAMA_API_KEY;
 
 // FIX 1: Explicitly grab index [0] to extract ONLY the username string
 const repoEnv = process.env.GITHUB_REPOSITORY || "";
-const username = repoEnv.split("/")[0];
+const username = repoEnv.split("/");
 
 // Target the caller's checked out repository workspace folder root
 const userWorkspace = process.env.USER_WORKSPACE || process.cwd();
