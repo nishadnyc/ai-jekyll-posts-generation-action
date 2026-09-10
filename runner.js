@@ -5,8 +5,9 @@ const https = require("https");
 const githubToken = process.env.GITHUB_TOKEN;
 const ollamaKey = process.env.OLLAMA_API_KEY;
 
-// Correctly resolve the owner username of whoever runs the action
-const username = process.env.GITHUB_REPOSITORY.split("/")[0];
+// FIX 1: Explicitly grab index [0] to extract ONLY the username string
+const repoEnv = process.env.GITHUB_REPOSITORY || "";
+const username = repoEnv.split("/")[0];
 
 // Target the caller's checked out repository workspace folder root
 const userWorkspace = process.env.USER_WORKSPACE || process.cwd();
@@ -87,8 +88,8 @@ async function getLastCommitDate(repo) {
   });
 
   const data = JSON.parse(res.data);
+  // FIX 2: Restored the [0] array index notation from your original script
   if (Array.isArray(data) && data.length > 0) {
-    // Fixed: Restored the exact original property path mapping
     return new Date(data[0].commit.committer.date);
   }
   return null;
