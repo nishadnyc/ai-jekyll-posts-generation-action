@@ -1,4 +1,4 @@
-name: "Automated Repo Article Generator"
+name: "AI Jekyll Posts Generator"
 description: "Scans public repositories, generates blog posts using Ollama Cloud, and writes them to a directory."
 branding:
   icon: "book"
