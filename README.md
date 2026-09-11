@@ -39,7 +39,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Generate blog posts
-        uses: your-username/your-action-repo@v1
+        uses: NishadNYC/automated-repo-article-generator@v1
         with:
           ollama-api-key: ${{ secrets.OLLAMA_API_KEY }}
 ```
