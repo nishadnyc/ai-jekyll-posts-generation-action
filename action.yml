@@ -1,5 +1,8 @@
 name: "Automated Repo Article Generator"
 description: "Scans public repositories, generates blog posts using Ollama Cloud, and writes them to a directory."
+branding:
+  icon: "book"
+  color: "green"
 inputs:
   github-token:
     description: "The GITHUB_TOKEN used to read and fetch repo contents"
